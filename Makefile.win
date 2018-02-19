@@ -1,0 +1,55 @@
+# Project: Interferencja
+# Compiler: Default GCC compiler
+# Compiler Type: MingW 3
+# Makefile created by wxDev-C++ IDE 7.4.2.569 on 16.06.17 15:32
+
+WXLIBNAME = wxmsw29u
+CPP       = g++.exe
+CC        = gcc.exe
+WINDRES   = "windres.exe"
+OBJ       = Objects/MingW/InterferencjaApp.o Objects/MingW/InterferencjaDlg.o Objects/MingW/vector.o Objects/MingW/generator.o Objects/MingW/draw.o Objects/MingW/matrix.o
+LINKOBJ   = "Objects/MingW/InterferencjaApp.o" "Objects/MingW/InterferencjaDlg.o" "Objects/MingW/vector.o" "Objects/MingW/generator.o" "Objects/MingW/draw.o" "Objects/MingW/matrix.o"
+LIBS      = -L"D:/Dev-Cpp/lib/wx/gcc_lib" -L"D:/Dev-Cpp/lib" -L"D:/Dev-Cpp/MinGW32/lib" -mwindows -l$(WXLIBNAME) -l$(WXLIBNAME)_gl -lwxscintilla -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lodbc32 -lopengl32  
+INCS      = -I"D:/Dev-Cpp/MinGW32/include"
+CXXINCS   = -I"D:/Dev-Cpp/MinGW32/include" -I"D:/Dev-Cpp/" -I"D:/Dev-Cpp/include/common"
+RCINCS    = --include-dir "D:/Dev-Cpp/include/common"
+BIN       = Output/MingW/Interferencja.exe
+DEFINES   = -D__WXMSW__ -D__GNUWIN32__ -D_UNICODE
+CXXFLAGS  = $(CXXINCS) $(DEFINES)  
+CFLAGS    = $(INCS) $(DEFINES)  
+GPROF     = gprof.exe
+ifeq ($(OS),Windows_NT)
+   RM = del /Q
+   FixPath = $(subst /,\,$1)
+else
+   RM = rm -f
+   FixPath = $1
+endif
+LINK      = g++.exe
+
+.PHONY: all all-before all-after clean clean-custom
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	$(RM) $(call FixPath,$(LINKOBJ)) "$(call FixPath,$(BIN))"
+
+$(BIN): $(OBJ)
+	$(LINK) $(LINKOBJ) -o "$(BIN)" $(LIBS) 
+
+Objects/MingW/InterferencjaApp.o: $(GLOBALDEPS) InterferencjaApp.cpp InterferencjaApp.h InterferencjaDlg.h draw.h vector.h matrix.h vector.h generator.h
+	$(CPP) -c InterferencjaApp.cpp -o Objects/MingW/InterferencjaApp.o $(CXXFLAGS)
+
+Objects/MingW/InterferencjaDlg.o: $(GLOBALDEPS) InterferencjaDlg.cpp InterferencjaDlg.h draw.h vector.h matrix.h vector.h generator.h
+	$(CPP) -c InterferencjaDlg.cpp -o Objects/MingW/InterferencjaDlg.o $(CXXFLAGS)
+
+Objects/MingW/vector.o: $(GLOBALDEPS) vector.cpp vector.h
+	$(CPP) -c vector.cpp -o Objects/MingW/vector.o $(CXXFLAGS)
+
+Objects/MingW/generator.o: $(GLOBALDEPS) generator.cpp generator.h
+	$(CPP) -c generator.cpp -o Objects/MingW/generator.o $(CXXFLAGS)
+
+Objects/MingW/draw.o: $(GLOBALDEPS) draw.cpp draw.h vector.h matrix.h vector.h generator.h
+	$(CPP) -c draw.cpp -o Objects/MingW/draw.o $(CXXFLAGS)
+
+Objects/MingW/matrix.o: $(GLOBALDEPS) matrix.cpp matrix.h vector.h
+	$(CPP) -c matrix.cpp -o Objects/MingW/matrix.o $(CXXFLAGS)
